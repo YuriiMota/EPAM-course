@@ -1,3 +1,7 @@
+/**
+ *
+ * @author Yura
+ */
 public class Piramida {
     public static void main(String args[]){
         String S="12345677654321";
