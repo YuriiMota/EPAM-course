@@ -2,7 +2,7 @@ package epam.droids;
 
 import java.util.Objects;
 
-public class Droid {
+public class Droid implements Comparable<Droid> {
     private String name;
     private int power;
 
@@ -25,6 +25,11 @@ public class Droid {
 
     public void setPower(int power) {
         this.power = power;
+    }
+
+    @Override
+    public int compareTo(Droid o) {
+        return name.compareTo(o.name);
     }
 
     @Override

@@ -3,6 +3,7 @@ package epam.droids;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class SpaceShip {
     List<? extends Droid> droid;
@@ -19,6 +20,7 @@ public class SpaceShip {
         this.droid = droid;
     }
     public static void main(String[] args){
+        PriorityQueue<Droid> droids1 = new PriorityQueue<>();
         Droid droid = new Droid("TT32", 230);
         Droid battleDroid = new BattleDroid("BigRo",3000,"Gunn-32");
         ArrayList<Droid> droids = new ArrayList<>(Arrays.asList(droid,battleDroid));
