@@ -1,0 +1,5 @@
+[INFO ] 2019-02-15 12:39:27.760 Main:11 - Info Task 5 
+[WARN ] 2019-02-15 12:39:27.760 Main:12 - Warn Task 5 
+[DEBUG] 2019-02-15 12:39:27.760 Main:13 - Debug Task 5 
+[ERROR] 2019-02-15 12:39:27.760 Main:14 - Error Task 5 
+[FATAL] 2019-02-15 12:39:27.760 Main:15 - Fatal Eror 

@@ -1,0 +1,267 @@
+{
+  "configuration": {
+    "status": "error",
+    "name": "JSONConfigDemo",
+    "packages": "com.mota",
+    "ThresholdFilter": {
+      "level": "all"
+    },
+    "properties": {
+      "property": [{
+        "name": "log-path",
+        "value": "logs"
+      },
+        {
+          "name": "archive",
+          "value": "${log-path}/archive"
+        }]
+    },
+    "appenders": {
+      "appender": [
+        {
+          "type": "Console",
+          "name": "Console_appender",
+          "PatternLayout": {
+            "pattern": "%d [%t] %-5p %c - %m%n"
+          }
+        },
+        {
+          "type": "Console",
+          "name": "Console_appender_task2_1",
+          "PatternLayout": {
+            "pattern": "%d [%t] %-5p %c - %m%n"
+          },
+          "ThresholdFilter": {
+            "level": "info"
+          }
+        },
+        {
+          "type": "Console",
+          "name": "Console_appender_task2_2",
+          "PatternLayout": {
+            "pattern": "%d [%t] %-5p %c - %m%n"
+          },
+          "ThresholdFilter": {
+            "level": "debug"
+          }
+        },
+        {
+          "type": "File",
+          "name": "rootLogFile",
+          "fileName": "logs/rootLogFile.log",
+          "PatternLayout": {
+            "pattern": "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n"
+          }
+        },
+        {
+          "type": "File",
+          "name": "task3_1",
+          "fileName": "logs/task3_1.log",
+          "PatternLayout": {
+            "pattern": "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %class{1}:%L - %msg %xEx{short}%n"
+          },
+          "ThresholdFilter": {
+            "level": "all"
+          }
+        },
+        {
+          "type": "RollingFile",
+          "name": "task3_2",
+          "fileName": "logs/task3_2.log",
+          "filePattern":"logs/archive/task3_2_old.log",
+          "PatternLayout": {
+            "pattern": "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+          },
+          "CronTriggeringPolicy":{
+            "schedule": "0 15 10 ? * *",
+            "evaluateOnStartup": "true"
+          }
+
+        },
+        {
+          "type": "RollingFile",
+          "name": "task3_3",
+          "fileName": "logs/task3_3.log",
+          "filePattern":"logs/archive/task3_3-%d{yyyy-MM-dd}.gz",
+          "PatternLayout": {
+            "pattern": "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+          },
+          "ThresholdFilter": {
+            "level": "all"
+          },
+          "Policies": {
+            "SizeBasedTriggeringPolicy": {
+              "size": "1 MB"
+            }
+          }
+        },
+        {
+          "type": "RollingFile",
+          "name": "task3_4",
+          "fileName": "logs/task3_4.log",
+          "filePattern":"logs/archive/task3_4-%d{yyyy-MM-dd}.gz",
+          "PatternLayout": {
+            "pattern": "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+          },
+          "ThresholdFilter": {
+            "level": "all"
+          },
+          "Policies": {
+            "TimeBasedTriggeringPolicy": {
+              "interval": "1",
+              "modulate": "true"
+            }
+          }
+        },
+        {
+          "type": "File",
+          "name": "task4",
+          "fileName": "logs/task4.log",
+          "PatternLayout": {
+            "pattern": "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %class{1}:%L - %msg %xEx{short}%n"
+          },
+          "ThresholdFilter": {
+            "level": "WARN",
+            "onMatch": "DENY",
+            "onMismatch": "NEUTRAL"
+          }
+        },
+        {
+          "type": "File",
+          "name": "task5_1",
+          "fileName": "logs/task5.log",
+          "PatternLayout": {
+            "pattern": "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %class{1}:%L - %msg %xEx{short}%n"
+          },
+          "LevelRangeFilter": {
+            "minLevel": "warn",
+            "maxLevel": "warn",
+            "onMatch": "ACCEPT",
+            "onMismatch": "DENY"
+          }
+        },
+        {
+          "type": "Console",
+          "name": "task5_2",
+          "PatternLayout": {
+            "pattern": "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} %xEx{short} %class{1}:%L - %msg %n"
+          },
+          "LevelRangeFilter": {
+            "minLevel": "info",
+            "maxLevel": "info",
+            "onMatch": "ACCEPT",
+            "onMismatch": "DENY"
+          }
+        },
+        {
+          "type": "smtp",
+          "name": "Mail",
+          "subject": "Error Log",
+          "to": "XXXX@gmail.com",
+          "from": "XXXXX@gmail.com",
+          "smtpHost": "smtp.gmail.com",
+          "smtpPort": "465",
+          "smtpProtocol": "smtps",
+          "smtpUsername": "XXXXX@gmail.com",
+          "smtpPassword": "XXXXXXX",
+          "bufferSize": "512",
+          "ThresholdFilter": {
+            "level": "trace"
+          }
+        },
+        {
+          "type": "SMS",
+          "name": "SMSsender",
+          "PatternLayout": {
+            "Pattern":"[%-5level] %d{yyyy-MM-dd HH:mm:ss} - %msg %xEx{short}"
+          }
+        },
+        {
+          "type": "Async",
+          "name": "AsyncSMS",
+          "AppenderRef": {
+            "ref": "SMSsender"
+          }
+        }
+      ]
+    },
+    "loggers": {
+      "logger": [
+        {
+          "name": "com.mota",
+          "level": "all",
+          "additivity": "false",
+          "appender-ref": [
+            {"ref": "Console_appender"},
+            {"ref": "rootLogFile"}
+          ]
+        },
+        {
+          "name": "com.mota",
+          "level": "all",
+          "additivity": "false",
+          "appender-ref": [
+            {"ref": "Console_appender_task2_1"},
+            {"ref": "Console_appender_task2_2"}
+          ]
+        },
+        {
+          "name": "com.mota",
+          "level": "all",
+          "additivity": "false",
+          "appender-ref": [
+            {"ref": "task3_1"},
+            {"ref": "task3_2"},
+            {"ref": "task3_3"},
+            {"ref": "task3_4"}
+          ]
+        },
+        {
+          "name": "com.mota",
+          "level": "all",
+          "additivity": "false",
+          "appender-ref": [
+            {"ref": "task4"}
+          ]
+        },
+        {
+          "name": "com.mota",
+          "level": "all",
+          "additivity": "false",
+          "appender-ref": [
+            {"ref": "task5_1"},
+            {"ref": "task5_2"}
+          ]
+        },
+        {
+          "name": "com.mota",
+          "level": "error",
+          "additivity": "false",
+          "appender-ref": [
+            {"ref": "Mail"}
+          ]
+        },
+        {
+          "name": "com.mota",
+          "level": "fatal",
+          "additivity": "false",
+          "appender-ref": [
+            {"ref": "AsyncSMS"}
+          ]
+        }
+
+      ],
+      "root": {
+        "level": "debug",
+        "AppenderRef": [
+          {
+            "ref": "Console_appender"
+          },
+          {
+            "ref": "rootLogFile"
+          }
+        ]
+      }
+    }
+  }
+}
